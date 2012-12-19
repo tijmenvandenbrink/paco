@@ -32,7 +32,7 @@ class Project(models.Model):
 
 class Skill(models.Model):
 	title = models.CharField(max_length=255,
-							help_text="Please sepcify the name of the skill")
+							help_text="Please specify the name of the skill")
 	description = models.TextField(help_text="Please specify a description of the skill")
 
 	def __unicode__(self):
@@ -41,9 +41,9 @@ class Skill(models.Model):
 
 class Task(models.Model):
 	WINDOWS = (
-				('Office Hours', 'Office Hours'),
-				('Extended Office Hours', 'Extended Office Hours'), 
-				('Out of Office Hours', 'Out of Office Hours'),
+				('OH', 'Office Hours'),
+				('EOH', 'Extended Office Hours'), 
+				('OOH', 'Out of Office Hours'),
 			)
 
 	title = models.CharField(max_length=255,
@@ -64,7 +64,7 @@ class ResourceRequest(models.Model):
 	requester = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
 	project = models.ForeignKey(Project)
 	task = models.ForeignKey(Task)
-	request_date = models.DateTimeField(datetime.now())
+	request_date = models.DateTimeField(auto_now_add=True)
 	start_date = models.DateTimeField('start date',
 								help_text="Please specify the start date")
 	end_date = models.DateTimeField('end date',
